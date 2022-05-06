@@ -27,11 +27,12 @@ const EditChaos = ({chaos}) => {
       {/* <!-- Button to Open the Modal --> */}
       <button
         type="button"
-        className="btn btn-primary"
+        className="edit-delete-button-og"
+        id='edit-button-og'
         data-toggle="modal"
         data-target={`#id${chaos.post_id}`}
       >
-        EDIT
+        Edit
       </button>
 
       {/* <!-- The Modal --> */}
@@ -48,15 +49,15 @@ const EditChaos = ({chaos}) => {
 
             {/* <!-- Modal body --> */}
             <div className="modal-body">
-                <input type="text" value={description} onChange={e => setDescription(e.target.value)}/>
+                <textarea id='modal-input' type="text" value={description} onChange={e => setDescription(e.target.value)}/>
             </div>
 
             {/* <!-- Modal footer --> */}
             <div className="modal-footer">
-            <button type="button" className="btn btn-danger" data-dismiss="modal" onClick={e => updateDescription(e)}>
+            <button type="button" className="btn btn-danger"  id='inner-edit-btn' data-dismiss="modal" onClick={e => updateDescription(e)}>
                 Edit
               </button>
-              <button type="button" className="btn btn-danger" data-dismiss="modal" onClick={() => setDescription(chaos.description)}>
+              <button type="button" className="btn btn-danger" id='inner-close-btn' data-dismiss="modal" onClick={() => setDescription(chaos.description)}>
                 Close
               </button>
             </div>

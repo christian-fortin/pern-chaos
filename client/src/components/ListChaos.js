@@ -18,6 +18,7 @@ const ListChaos = () => {
       }
   }
 
+  // Get ALL posts function
   const getChaos = async () => {
     try {
       const response = await fetch('http://localhost:5001/chaos');
@@ -30,6 +31,7 @@ const ListChaos = () => {
     }
   };
 
+  // 
   useEffect(() => {
     getChaos();
   }, []);
@@ -37,14 +39,17 @@ const ListChaos = () => {
   // console.log(chaos);
   return (
     <div>
-      <h1>List of Chaos</h1>
+      {/* <h1>List of Chaos</h1> */}
       <div>
-        <h3>Description</h3>
+        {/* <h3>Description</h3> */}
         {chaos.map((chaos) => (
-          <div key={chaos.post_id}>
-            <p>{chaos.description}</p>
+          <div className='post-container' key={chaos.post_id}>
+            <p className='ptag-description'>{chaos.description}</p>
+            <div className='edit-delete-div'>
             <EditChaos chaos={chaos}/>
-            <button onClick={() => deletePost(chaos.post_id)}>Delete</button>
+            <button id='delete-button-og' className="edit-delete-button-og" onClick={() => deletePost(chaos.post_id)}>Delete</button>
+            </div>
+           
           </div>
         ))}
       </div>
