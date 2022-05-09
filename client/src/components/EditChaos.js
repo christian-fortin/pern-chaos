@@ -7,8 +7,13 @@ const EditChaos = ({chaos}) => {
     const updateDescription = async (e) => {
         e.preventDefault();
         try {
+
+          //proxy
+          
+
+
             const body = { description };
-            const response = await fetch (`http://localhost:5001/chaos/${chaos.post_id}`, {
+            const response = await fetch (`/chaos/${chaos.post_id}`, {
                 method: "PUT",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)

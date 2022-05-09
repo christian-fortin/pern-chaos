@@ -1,9 +1,15 @@
 // CHAOS BLOG
-
 const express = require('express');
 const app = express();
 const cors = require("cors");
 const pool = require("./db")
+const path = require("path")
+const PORT = process.env.PORT || 5001
+
+//process.env.PORT
+// process.env.NODE_ENV => production or undefined
+// Describes the environment the app will run in
+
 
 
 // middleware
@@ -11,6 +17,16 @@ app.use(cors())
 app.use(express.json());
 // This gives us access to request.body
 
+
+// app.use(express.static("./client/build"))
+
+if (process.env.NODE_ENV === "production") {
+    //server static content
+    app.use(express.static(path.join(__dirname, "client/build")));
+}
+
+console.log(path.join(__dirname, "client/build")); 
+// location where index.js file is running
 
 
 //ROUTES//
@@ -85,7 +101,11 @@ app.delete('/chaos/:id', async (req, res) => {
     }
 })
 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client/build/index.html"))
+} )
 
-app.listen(5001, ()=> {
-    console.log("server has started on port 5001");
+
+app.listen(PORT, ()=> {
+    console.log(`server has started on port ${PORT}`);
 })

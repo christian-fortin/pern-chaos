@@ -7,7 +7,7 @@ const ListChaos = () => {
   // Delete Function
   const deletePost = async (id) => {
     try {
-        const deletePost = await fetch(`http://localhost:5001/chaos/${id}`, {
+        const deletePost = await fetch(`/chaos/${id}`, {
             method: 'DELETE'
         })
 
@@ -21,7 +21,7 @@ const ListChaos = () => {
   // Get ALL posts function
   const getChaos = async () => {
     try {
-      const response = await fetch('http://localhost:5001/chaos');
+      const response = await fetch('/chaos');
       const jsonData = await response.json();
 
       // console.log(jsonData)
