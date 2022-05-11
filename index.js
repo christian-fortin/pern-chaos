@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5001
 
 
 // middleware
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 // This gives us access to request.body
 
@@ -22,6 +22,7 @@ app.use(express.json());
 
 if (process.env.NODE_ENV === "production") {
     //server static content
+    // npm run build
     app.use(express.static(path.join(__dirname, "client/build")));
 }
 
@@ -33,9 +34,9 @@ console.log(path.join(__dirname, "client/build"));
 //create a post
 app.post("/chaos", async (req, res) => {
     try {
-        const {description} = req.body;
+        const { description } = req.body;
         // destructuring
-        const newChaos = await pool.query("INSERT INTO chaos_post (description) VALUES($1) RETURNING *", [description])
+        const newChaos = await pool.query("INSERT INTO chaos_post (description) VALUES ($1) RETURNING *", [description]);
         // inserting the post into the table, and using $1 as a place holder. Then returning all of the data.
         res.json(newChaos.rows[0])
         
@@ -51,7 +52,8 @@ app.post("/chaos", async (req, res) => {
 app.get('/chaos', async (req, res) => {
     try {
         const allChaos = await pool.query("SELECT * FROM chaos_post")
-        res.json(allChaos.rows);
+        res.json(allChaos.rows.reverse());
+        // console.log(allChaos.rows.reverse());
     } catch (err) {
         console.error(err.message);
     }
@@ -61,7 +63,7 @@ app.get('/chaos', async (req, res) => {
 app.get('/chaos/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const chaos = await pool.query("SELECT * FROM chaos_post WHERE post_id = $1", [id])
+        const chaos = await pool.query("SELECT * FROM chaos_post WHERE post_id = $1", [id]);
 
         res.json(chaos.rows[0])
     } catch (err) {
@@ -75,11 +77,11 @@ app.put('/chaos/:id', async (req, res) => {
       
         const { id } = req.params;
         const { description } = req.body;
-        const updateChaos = await pool.query("UPDATE chaos_post SET description = $1 WHERE post_id = $2", [description, id])
+        const updateChaos = await pool.query("UPDATE chaos_post SET description = $1 WHERE post_id = $2", [description, id]);
         res.json("Chaos was updated!")
-        const chaos = await pool.query("SELECT * FROM chaos_post WHERE post_id = $1", [id])
+        // const chaos = await pool.query("SELECT * FROM chaos_post WHERE post_id = $1", [id])
 
-        res.json(chaos.rows[0])
+        // res.json(chaos.rows[0])
     } catch (err) {
         console.error(err.message);
     }
@@ -92,18 +94,18 @@ app.delete('/chaos/:id', async (req, res) => {
 
       
         const { id } = req.params;
-        const deleteChaos = await pool.query("DELETE FROM chaos_post WHERE post_id = $1", [id])
+        const deleteChaos = await pool.query("DELETE FROM chaos_post WHERE post_id = $1", [id,]);
       
 
-        res.json('chaos post was deleted!')
+        res.json('Chaos post was deleted!')
     } catch (err) {
         console.log(err.message);
     }
 })
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client/build/index.html"))
-} )
+    res.sendFile(path.join(__dirname, "client/build/index.html"));
+});
 
 
 app.listen(PORT, ()=> {

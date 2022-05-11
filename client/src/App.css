@@ -12,6 +12,7 @@ body{
   margin: 0 0 3rem 0;
   font-size: 7rem;
   text-decoration: underline solid .7rem;
+  color: rgb(161, 255, 249);
 }
 
 .add-post-form {

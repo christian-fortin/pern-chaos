@@ -10,9 +10,10 @@ const ListChaos = () => {
         const deletePost = await fetch(`/chaos/${id}`, {
             method: 'DELETE'
         })
+        // THIS IS DIFFERENT^ --- WILL IT CAUSE ERRORS?
 
         console.log(deletePost);
-        setChaos(chaos.filter(chaos => chaos.post_id !== id))
+        setChaos(chaos.filter((chaos) => chaos.post_id !== id))
     } catch (err) {
         console.error(err.message);
       }

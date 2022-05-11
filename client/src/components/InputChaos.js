@@ -30,7 +30,7 @@ const onSubmitForm = async (e) => {
     <div>
         <h1 className='title'>Chaos</h1>
         <form className="add-post-form" action="" onSubmit={onSubmitForm}>
-            <textarea className="add-post-textarea" type="text" placeholder="Say whatever you want... It's anonymous" value={description} onChange={e => setDescription(e.target.value)} />
+            <textarea className="add-post-textarea" type="text" placeholder="Say whatever you want... It's anonymous" value={description} onChange={(e) => setDescription(e.target.value)} />
             {/* value taken from state, onChange is taking what ever is in the text field "e" and using it to change the state. */}
             <button className='post-button' >Post</button>
         </form>
