@@ -16,6 +16,7 @@ const devConfig = `postgresql://${process.env.PG_USER}:@${process.env.PG_HOST}:$
 const proConfig = {
     connectionString: process.env.DATABASE_URL // comes from heroku addons
 }
+console.log(proConfig);
 
 const pool = new Pool({
     connectionString:
